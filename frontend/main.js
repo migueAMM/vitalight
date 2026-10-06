@@ -15,7 +15,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // User provided URLs
     const waBaseUrl = "https://wa.me/qr/EYXBN3Z5FMBDO1";
-    const igUrl = "https://instagram.com/shinyheart_accesorios?stkn=MXJoMXA1dTkwdXE4ag%3D%3D&utm_source=qr";
+    const igUrl = "https://www.instagram.com/vita_lightt?stkn=NGJjOGhhdjFiNTU4";
 
     // Update Social Links
     document.getElementById('ig-link').href = igUrl;
