@@ -14,29 +14,33 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // User provided URLs
-    const waBaseUrl = "https://wa.me/qr/EYXBN3Z5FMBDO1";
-    const igUrl = "https://www.instagram.com/vita_lightt?stkn=NGJjOGhhdjFiNTU4";
+    const waPhone = "573175798113";
+    const waBaseUrl = `https://wa.me/${waPhone}`;
+    const igUrl = "https://www.instagram.com/vita_lightt/"; // Se removió el parámetro ?stkn= para evitar el mensaje de invitación
 
     // Update Social Links
     document.getElementById('ig-link').href = igUrl;
     document.getElementById('ig-footer').href = igUrl;
     
-    // We append the text param but using a simple WA link approach
+    // Mensaje por defecto para los botones generales de WhatsApp
     const waNavMessage = encodeURIComponent("¡Hola! Me gustaría obtener más información sobre los yogurts y parfaits.");
     
-    // Some wa.me/qr links don't accept ?text directly, but we will assign it. 
-    // If it fails on the user end they will just see the contact, which is fine.
-    document.getElementById('wa-link-nav').href = waBaseUrl;
-    document.getElementById('floating-wa').href = waBaseUrl;
+    // Asignar los enlaces con mensaje para el navbar y el botón flotante
+    document.getElementById('wa-link-nav').href = `${waBaseUrl}?text=${waNavMessage}`;
+    document.getElementById('floating-wa').href = `${waBaseUrl}?text=${waNavMessage}`;
 
     // Product Order Buttons setup
     const orderBtns = document.querySelectorAll('.wa-order');
     orderBtns.forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.preventDefault();
-            // Since it's a QR shortlink, appending ?text= might not be supported natively by the WA redirector, 
-            // but we'll try to just open the link directly so they reach the chat.
-            window.open(waBaseUrl, '_blank');
+            const product = btn.getAttribute('data-product');
+            let message = "¡Hola! Me gustaría hacer un pedido.";
+            if (product) {
+                message = `¡Hola! Me gustaría hacer un pedido de ${product}. ¿Me podrías dar más información?`;
+            }
+            const finalUrl = `${waBaseUrl}?text=${encodeURIComponent(message)}`;
+            window.open(finalUrl, '_blank');
         });
     });
 
